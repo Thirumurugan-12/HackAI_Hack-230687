@@ -10,7 +10,7 @@ bluesense = Agent("Bluesense",endpoint=["http://127.0.0.1:8001/submit"])
 @bluesense.on_interval(period=300.0)
 async def Tempreach(ctx: Context):
     ctx.logger.info(f'Temperate Excedded by {int(temp_celsius) - int(limit_temp)}')
-    st.write(temp_celsius)
+    st.write("Current Temp",temp_celsius)
     st.write(" Temperature Exceeded the Limit")
 
 bluesense.start_background_tasks()
@@ -35,9 +35,9 @@ if city is not None and len(city) > 0:
     temp_celsius = kelvin_to_celsius(temp_kelvin) 
     print("Ex")
     if limit_temp is not None and len(limit_temp) > 0:
-        if int(limit_temp) > int(temp_celsius):
+        if int(limit_temp) < int(temp_celsius):
             print("Exceptional Temperature")
             bluesense.run()
     st.write("Temp Normal")
-    st.write(temp_celsius)
+    st.write("Current TEMP",temp_celsius)
     #print(response)
